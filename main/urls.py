@@ -35,6 +35,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor', include('ckeditor_uploader.urls')),
     path('', include('blog.urls', namespace='blog')),
+    path('account/', include('django.contrib.auth.urls')),
     path('account/', include('account.urls', namespace='account')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
