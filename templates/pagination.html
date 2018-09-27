@@ -1,0 +1,19 @@
+<div class="row m-4">
+    <div class="col float-left ">
+        {% if page.has_previous %}
+        <a href="?page={{ page.previous_page_number }}{% if request.GET.q %}& q={{ request.GET.q }}{% endif %}"><button type="submit" class="btn btn-primary float-right">Previous</button></a>
+        {% endif %}
+    </div>
+    <div class="col float-none">
+        <span class="text-center">
+            Page {{ page.number }} of {{ page.paginator.num_pages }}.
+        </span>
+
+    </div>
+    <div class="col float-right">
+        {% if page.has_next %}
+        <a href="?page={{ page.next_page_number }} {% if request.GET.q %}& q={{ request.GET.q }}{% endif %}"><button type="submit" class="btn btn-primary">Next</button></a>
+        {% endif %}
+
+    </div>
+</div>

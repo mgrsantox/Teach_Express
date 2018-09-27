@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title_content %}
+Home
+{% endblock title_content %}
+
+
+{% block body_content %}
+<!-- Blog Post -->
+<div class="col-md-8">
+	{% if tag %}
+	<h2>Posts tagged with "{{ tag.name }}"</h2>
+	{% endif %}
+	{% for post in posts %}
+	<h1 class="my-4"><a href="{{ post.get_absolute_url }}">{{ post.title|title }}</a>
+
+		<!-- <small>
+			<h3 class="small">Tags: {{ post.tags.all|join:", " }}</h3>
+		</small> -->
+
+		<small>
+			<h3 class="small">
+				Tags:
+				{% for tag in post.tags.all %}
+				<a href="{% url 'blog:post_list_by_tag' tag.slug %}">
+					{{ tag.name }}
+				</a>
+				{% if not forloop.last %}, {% endif %}
+				{% endfor %}
+			</h3>
+		</small>
+	</h1>
+	<div class="card mb-4">
+		
+		{% if post.image %}
+		<img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap">
+		{% else %}
+		{% endif %}
+			
+		<div class="card-body">
+			<p class="card-text">{{ post.body|truncatewords:60|safe }}</p>
+			<a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+		</div>
+		<div class="card-footer text-muted">
+			<h3 class="small">Posted on {{ post.publish }} by
+				<a href="https://saileshkush95.github.io/">{{ post.author }}</a></h3>
+		</div>
+	</div>
+	<div class="dropdown-divider"></div>
+	{% endfor %}
+	<!-- {% include "pagination.html" with page=page_obj  %} for class based views -->
+	<!-- for the function based views -->
+	{% include "pagination.html" with page=posts %}	
+</div>
+{% endblock body_content %}
