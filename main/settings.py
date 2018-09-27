@@ -35,8 +35,12 @@ ALLOWED_HOSTS = []
 SITE_ID = 1
 
 INSTALLED_APPS = [
+<<<<<<< HEAD
+    
+=======
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
+>>>>>>> fea0e1fa1796ae441ac202399d3cc1153f0244c1
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +53,11 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+<<<<<<< HEAD
+    'account.apps.AccountConfig',
+    'blog.apps.BlogConfig',
+=======
+>>>>>>> fea0e1fa1796ae441ac202399d3cc1153f0244c1
 ]
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
@@ -92,7 +101,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blog2',
         'USER': 'root',
+<<<<<<< HEAD
+        'PASSWORD': 'pysantosh787898',
+=======
         'PASSWORD': '2069',
+>>>>>>> fea0e1fa1796ae441ac202399d3cc1153f0244c1
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -152,8 +165,16 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 LOGIN_REDIRECT_URL = 'account:dashboard'
+<<<<<<< HEAD
+LOGIN_URL = 'account:login'
+LOGOUT_URL = 'account:logout'
+=======
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+<<<<<<< HEAD
 LOGOUT_REDIRECT_URL = 'blog:home'
+=======
+>>>>>>> fea0e1fa1796ae441ac202399d3cc1153f0244c1
+>>>>>>> e803523b593a389188c3e79ea98bd6602a68fa77
 
 
