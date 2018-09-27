@@ -3,4 +3,6 @@
 {% block body_content %}
 <h1>Logged out</h1>
 <p>You have been successfully logged out. You can <a href="{% url 'account:login' %}">log-in again</a>.</p>
+<a href="{% url 'blog:home' %}">Back to Normal User Home Page</a>
+
 {% endblock body_content %}
