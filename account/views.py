@@ -38,4 +38,6 @@ def dashboard(request):
     else:
         return redirect('/')
 
-    
+
+def new_user_register(request):
+    return render(request, 'account/register.html', {})   
