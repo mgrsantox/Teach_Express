@@ -46,15 +46,6 @@ class Post(models.Model):
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # Our custom manag
 
-    def remove_all_tags_without_objects(self):
-        for tag in Tag.objects.all():
-            if tag.taggit_taggeditem_items.count() == 0:
-                print('Removing: {}'.format(tag))
-                return tag.delete()
-            else:
-                pass
-                print('Keeping: {}'.format(tag))
-
     def get_absolute_url(self):
         return reverse('blog:post_detail',
                        args=[self.publish.year,
