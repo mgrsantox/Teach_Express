@@ -116,7 +116,7 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 					<a class="dropdown-item" href="{% url 'account:new_user_register' %}">Add New User</a>
-					<a class="dropdown-item" href="#">All Users</a>
+					<a class="dropdown-item" href="{% url 'account:all_user' %}">All Users</a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">
@@ -126,8 +126,8 @@
 						<span>Posts</span>
 					</a>
 					<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-						<a class="dropdown-item" href="login.html">Add Post</a>
-						<a class="dropdown-item" href="register.html">View Post</a>
+						<a class="dropdown-item" href="{% url 'account:new_post' %}">Add Post</a>
+						<a class="dropdown-item" href="{% url 'account:all_post_list' %}">View Post</a>
 					</div>
 				</li>
 			<li class="nav-item">

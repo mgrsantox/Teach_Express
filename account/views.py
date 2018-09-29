@@ -40,4 +40,16 @@ def dashboard(request):
 
 
 def new_user_register(request):
-    return render(request, 'account/register.html', {})   
+    return render(request, 'account/register.html', {}) 
+
+
+def view_all_user(request):
+    return render(request, 'account/all_user.html', {}) 
+
+
+def add_new_post(request):
+    return render(request, 'account/add_new_post.html', {}) 
+
+
+def view_all_post_list(request):
+    return render(request, 'account/all_post.html', {}) 
