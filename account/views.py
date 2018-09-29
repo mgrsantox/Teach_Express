@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-
+from blog.models import Post
 from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -52,4 +52,5 @@ def add_new_post(request):
 
 
 def view_all_post_list(request):
-    return render(request, 'account/all_post.html', {}) 
+    posts = Post.objects.all()
+    return render(request, 'account/all_post.html', {'posts':posts}) 
