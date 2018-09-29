@@ -64,6 +64,13 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-publish',)
+    def publish_preety(self):
+        return self.publish.strftime('%Y %b %e')
+
+
+    def updated_preety(self):
+        return self.updated.strftime('%Y %b %e')
+
 
     def __str__(self):
         return self.title
