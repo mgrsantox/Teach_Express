@@ -33,4 +33,9 @@ def user_login(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'account/index.html', {'section': 'dashboard'})
+    if request.user.is_superuser:
+        return render(request, 'account/index.html', {'section': 'dashboard'})
+    else:
+        return redirect('/')
+
+    
