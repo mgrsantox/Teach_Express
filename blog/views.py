@@ -8,6 +8,7 @@ from .models import Post, Comment
 from .forms import EmailPostForm, CommentForm
 from django.db.models import Q
 from django.http import HttpResponseRedirect
+from account.views import UserRegistrationForm
 
 # for deleting unused tag from the list of the tags
 
@@ -145,3 +146,27 @@ def post_share(request, post_id):
                                                'sent': sent})
 
 
+
+# for register new user throug new views
+def new_user_register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(
+                user_form.cleaned_data['password']
+            )
+            new_user.save()
+
+            return render(request,
+                        'blog/register_done.html',
+                        {
+                            'new_user': new_user
+                        })
+    else:
+        user_form = UserRegistrationForm()
+
+    return render(request,
+                'blog/register.html',
+                {'user_form': user_form}
+                )
