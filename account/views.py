@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import password_changed
 from django.shortcuts import redirect, render
 
-from .forms import LoginForm
+from .forms import LoginForm, UserRegistrationForm
 
 
 def user_login(request):
@@ -38,31 +38,57 @@ def dashboard(request):
     else:
         return redirect('/')
 
+
 @login_required
 def new_user_register(request):
-    if request.user.is_superuser:
-        return render(request, 'account/register.html', {}) 
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(
+                user_form.cleaned_data['password']
+            )
+            new_user.save()
+
+            return render(request,
+                          'account/register.html',
+                          {
+                              'new_user': new_user
+                          })
     else:
-        return redirect('/')
+        user_form = UserRegistrationForm()
+
+    return render(request,
+                  'account/register.html',
+                  {'user_form': user_form}
+                  )
+
+    # if request.user.is_superuser:
+    #     return render(request, 'account/register.html', {})
+    # else:
+    #     return redirect('/')
+
 
 @login_required
 def view_all_user(request):
     if request.user.is_superuser:
-        return render(request, 'account/all_user.html', {}) 
+        return render(request, 'account/all_user.html', {})
     else:
         return redirect('/')
+
 
 @login_required
 def add_new_post(request):
     if request.user.is_superuser:
-        return render(request, 'account/add_new_post.html', {}) 
+        return render(request, 'account/add_new_post.html', {})
     else:
         return redirect('/')
+
 
 @login_required
 def view_all_post_list(request):
     if request.user.is_superuser:
         posts = Post.objects.all()
-        return render(request, 'account/all_post.html', {'posts':posts}) 
+        return render(request, 'account/all_post.html', {'posts': posts})
     else:
         return redirect('/')
