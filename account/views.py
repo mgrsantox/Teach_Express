@@ -52,7 +52,7 @@ def new_user_register(request):
                 new_user.save()
 
                 return render(request,
-                            'account/register.html',
+                            'account/register_done.html',
                             {
                                 'new_user': new_user
                             })
