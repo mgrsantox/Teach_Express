@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Profile
 
 # This is for creating custom login form
-
-
 class LoginForm(forms.Form):
     username = forms.CharField(
         required=True,
@@ -38,3 +37,9 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Password Doesn\'t match')
         return cd['password2']
+
+# Extending user model for adding additional fields
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('date_of_birth', 'photo')
