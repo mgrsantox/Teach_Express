@@ -41,32 +41,31 @@ def dashboard(request):
 
 @login_required
 def new_user_register(request):
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            new_user = user_form.save(commit=False)
-            new_user.set_password(
-                user_form.cleaned_data['password']
-            )
-            new_user.save()
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            user_form = UserRegistrationForm(request.POST)
+            if user_form.is_valid():
+                new_user = user_form.save(commit=False)
+                new_user.set_password(
+                    user_form.cleaned_data['password']
+                )
+                new_user.save()
 
-            return render(request,
-                          'account/register.html',
-                          {
-                              'new_user': new_user
-                          })
+                return render(request,
+                            'account/register.html',
+                            {
+                                'new_user': new_user
+                            })
+        else:
+            user_form = UserRegistrationForm()
+
+        return render(request,
+                    'account/register.html',
+                    {'user_form': user_form}
+                    )
+
     else:
-        user_form = UserRegistrationForm()
-
-    return render(request,
-                  'account/register.html',
-                  {'user_form': user_form}
-                  )
-
-    # if request.user.is_superuser:
-    #     return render(request, 'account/register.html', {})
-    # else:
-    #     return redirect('/')
+        return redirect('/')
 
 
 @login_required
