@@ -38,19 +38,31 @@ def dashboard(request):
     else:
         return redirect('/')
 
-
+@login_required
 def new_user_register(request):
-    return render(request, 'account/register.html', {}) 
+    if request.user.is_superuser:
+        return render(request, 'account/register.html', {}) 
+    else:
+        return redirect('/')
 
-
+@login_required
 def view_all_user(request):
-    return render(request, 'account/all_user.html', {}) 
+    if request.user.is_superuser:
+        return render(request, 'account/all_user.html', {}) 
+    else:
+        return redirect('/')
 
-
+@login_required
 def add_new_post(request):
-    return render(request, 'account/add_new_post.html', {}) 
+    if request.user.is_superuser:
+        return render(request, 'account/add_new_post.html', {}) 
+    else:
+        return redirect('/')
 
-
+@login_required
 def view_all_post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'account/all_post.html', {'posts':posts}) 
+    if request.user.is_superuser:
+        posts = Post.objects.all()
+        return render(request, 'account/all_post.html', {'posts':posts}) 
+    else:
+        return redirect('/')
